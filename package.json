@@ -1,0 +1,24 @@
+{
+  "name": "goodgoodstudy",
+  "version": "0.0.1",
+  "description": "A repository that records the learning process.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeomanyang/goodgoodstudy.git"
+  },
+  "keywords": [
+    "study",
+    "JavaScript",
+    "iOS"
+  ],
+  "author": "yeomanyang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yeomanyang/goodgoodstudy/issues"
+  },
+  "homepage": "https://github.com/yeomanyang/goodgoodstudy#readme"
+}
