@@ -28,6 +28,7 @@ const getMedia = (async constraints => {
             video.play();
         };
     } catch (error) {
+        console.error(error);
         alert("你这操作，没法演示了(╯°Д°)╯︵ ┻━┻");
     }
 })(constraints);
@@ -61,6 +62,7 @@ function startRecording() {
         mediaRecorder.ondataavailable = handleDataAvailable;
         mediaRecorder.start(10);
     } catch (err) {
+        console.error(err);
         alert("请使用Chrome 47以上版本浏览器！");
     }
 }
