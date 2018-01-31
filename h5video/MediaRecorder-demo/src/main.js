@@ -95,5 +95,5 @@ function download() {
     setTimeout(function() {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
-    }, 100);
+    }, 50);
 }
