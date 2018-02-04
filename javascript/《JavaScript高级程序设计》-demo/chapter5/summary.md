@@ -9,7 +9,7 @@
 
 ### Array的操作函数：
 
-1. 用push和pop结合可以实现LIFO（last in first out）的栈行为
+1. 用push和pop结合可以实现LIFO（Last In First Out）的栈行为
 
 
 ```
@@ -19,7 +19,7 @@ console.log(colors.pop()); // black
 console.log(colors); // ['red', 'blur']
 ```
 
-2. 用push和shift结合可以实现FIFO（first in first out）的队列行为，从队尾进，队首出
+2. 用push和shift结合可以实现FIFO（First In First Out）的队列行为，从队尾进，队首出
 
 ```
 let colors = ['red', 'blur'];
