@@ -51,7 +51,7 @@ function handleDataAvailable(e) {
 function startRecording() {
     let options = {
         audioBitsPerSecond: 128000,
-        videoBitsPerSecond: 2500000,
+        videoBitsPerSecond: 400000,
         mimeType: "video/webm"
     };
     try {
