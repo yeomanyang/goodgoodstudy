@@ -118,3 +118,6 @@ const reduceRes1 = numbers2.reduceRight((a, b) => {
 console.log(reduceRes1); //15
 
 console.log(Date.parse('May 25, 2004'));
+
+console.log(new Date());
+
