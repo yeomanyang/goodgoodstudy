@@ -121,3 +121,7 @@ console.log(Date.parse('May 25, 2004'));
 
 console.log(new Date());
 
+const date1 = new Date(2007, 0, 1);
+const date2 = new Date(2007, 1, 1);
+
+console.log(date1 > date2);
