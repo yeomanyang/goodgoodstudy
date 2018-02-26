@@ -163,3 +163,18 @@ console.log(reduceRes1); //15
 
 ### Date类型
 
+常用方法：
+
+```
+console.log(Date.parse('May 25, 2004')); // 1085414400000
+
+console.log(new Date()); // Mon Feb 26 2018 22:14:50 GMT+0800 (CST)
+
+console.log(Date.now()); // 1519654479774
+
+console.log(`${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`); // 2018-1-26 22:17:13
+
+```
+
+* UTC（Coordinated Universal Time协调世界时）是个标准时间，GMT（Greenwich Mean Time，格林威治时间)是时区时间。UTC是根据原子钟来计算时间，而GMT是根据地球的自转和公转来计算时间。基本可以等同，UTC更正式，也更精确
+* Date的valueOf返回的时候日期的毫秒表示，因此可以直接用比较操作法比较两个时间

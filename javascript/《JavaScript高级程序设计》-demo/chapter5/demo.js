@@ -117,11 +117,15 @@ const reduceRes1 = numbers2.reduceRight((a, b) => {
 
 console.log(reduceRes1); //15
 
-console.log(Date.parse('May 25, 2004'));
+console.log(Date.parse('May 25, 2004')); // 1085414400000
 
-console.log(new Date());
+console.log(new Date()); // Mon Feb 26 2018 22:14:50 GMT+0800 (CST)
 
 const date1 = new Date(2007, 0, 1);
 const date2 = new Date(2007, 1, 1);
 
 console.log(date1 > date2);
+
+const now = new Date();
+
+console.log(`${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`); // 2018-1-26 22:17:13
