@@ -129,3 +129,7 @@ console.log(date1 > date2);
 const now = new Date();
 
 console.log(`${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`); // 2018-1-26 22:17:13
+
+const pattern1 = /at/g;
+
+const pattern2 = /[bc]at/i;
