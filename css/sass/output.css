@@ -1,0 +1,91 @@
+@charset "UTF-8";
+/* 支持class嵌套写法 */
+div p {
+  text-decoration: underline; }
+
+/* 支持&来获得父级选择器 */
+a:hover {
+  text-decoration: underline; }
+
+/* 支持样式属性的嵌套写法 */
+.funky {
+  font-family: fantasy;
+  font-size: 30em;
+  font-weight: bold; }
+
+/* 支持*Placeholder Selectors* */
+.btn, .primary-btn {
+  color: #333; }
+
+.primary-btn {
+  color: #333; }
+
+/* 支持数字运算 */
+.number {
+  width: 9em; }
+
+/* Interpolation 插值  */
+p.foo {
+  border-color: blue; }
+
+/* SassScript中的& */
+/* 变量默认 */
+#main {
+  content: "First content";
+  new-content: "First time reference"; }
+
+/* @at-root */
+.parent {
+  color: #000; }
+  .child {
+    color: #fff; }
+
+.page {
+  color: red; }
+
+/* if() */
+.if {
+  width: 1px;
+  height: 2px; }
+
+/* @if */
+p {
+  color: green; }
+
+/* @for */
+.item-1 {
+  width: 2em; }
+
+.item-2 {
+  width: 4em; }
+
+.item-3 {
+  width: 6em; }
+
+/* @each */
+.item-1 {
+  width: 2em; }
+
+.item-2 {
+  width: 4em; }
+
+.item-3 {
+  width: 6em; }
+
+/* mixins */
+a {
+  color: blue;
+  background-color: red; }
+
+.shadows {
+  box-shadow: 0px 4px 5px #666, 2px 6px 10px #999; }
+
+.kl-header {
+  color: #333; }
+
+.colors {
+  background-color: blue;
+  color: white;
+  border-color: blue; }
+
+/*# sourceMappingURL=output.css.map */

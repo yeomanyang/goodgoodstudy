@@ -1,0 +1,176 @@
+/* 支持class嵌套写法 */
+
+div {
+    p {
+        text-decoration: underline;
+    }
+}
+
+/* 支持&来获得父级选择器 */
+
+a {
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* 支持样式属性的嵌套写法 */
+
+.funky {
+    font: {
+        family: fantasy;
+        size: 30em;
+        weight: bold;
+    }
+}
+
+/* 支持*Placeholder Selectors* */
+
+.btn {
+    color: #333;
+}
+
+.primary-btn {
+    @extend .btn;
+}
+
+%btn {
+    color: #333;
+}
+
+.primary-btn {
+    @extend %btn;
+}
+
+/* 支持数字运算 */
+
+.number {
+    width: (1em + 2em) * 3;
+}
+
+/* Interpolation 插值  */
+
+$name: foo;
+$attr: border;
+p.#{$name} {
+    #{$attr}-color: blue;
+}
+
+/* SassScript中的& */
+
+.foo.bar .baz.bang,
+.bip.qux {
+    $selector: &;
+}
+
+/* 变量默认 */
+
+$content: "First content";
+$content: "Second content?" !default;
+$new_content: "First time reference" !default;
+#main {
+    content: $content;
+    new-content: $new_content;
+}
+
+/* @at-root */
+
+.parent {
+    color: #000;
+    @at-root .child {
+        color: #fff;
+    }
+}
+
+@media print {
+    .page {
+        @at-root (without: media) {
+            color: red;
+        }
+    }
+}
+
+/* if() */
+
+.if {
+    width: if(true, 1px, 2px);
+    height: if(false, 1px, 2px);
+}
+
+/* @if */
+
+$type: monster;
+p {
+    @if $type==ocean {
+        color: blue;
+    }
+    @else if $type==matador {
+        color: red;
+    }
+    @else if $type==monster {
+        color: green;
+    }
+    @else {
+        color: black;
+    }
+}
+
+/* @for */
+
+@for $i from 1 through 3 {
+    .item-#{$i} {
+        width: 2em * $i;
+    }
+}
+
+/* @each */
+
+@each $i in 1,
+2,
+3 {
+    .item-#{$i} {
+        width: 2em * $i;
+    }
+}
+
+/* mixins */
+
+@mixin silly-links($color) {
+    a {
+        color: $color;
+        background-color: red;
+    }
+}
+
+@include silly-links(blue);
+
+@mixin box-shadow($shadows...) {
+    box-shadow: $shadows;
+}
+
+.shadows {
+    @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+}
+
+@mixin b($block) {
+    .#{'kl-' + $block} {
+        @content;
+    }
+}
+
+@include b($block: header) {
+    color: #333;
+}
+
+$color: white;
+@mixin colors($color: blue) {
+    background-color: $color;
+    @content;
+    border-color: $color;
+}
+
+.colors {
+    @include colors {
+        color: $color;
+    }
+}
