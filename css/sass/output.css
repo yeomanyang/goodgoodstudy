@@ -72,6 +72,10 @@ p {
 .item-3 {
   width: 6em; }
 
+/* Function */
+#sidebar {
+  width: 240px; }
+
 /* mixins */
 a {
   color: blue;
@@ -80,12 +84,23 @@ a {
 .shadows {
   box-shadow: 0px 4px 5px #666, 2px 6px 10px #999; }
 
-.kl-header {
-  color: #333; }
-
 .colors {
   background-color: blue;
   color: white;
   border-color: blue; }
+
+.kl-header {
+  color: #333; }
+  .kl-header__title {
+    line-height: 1px; }
+    .kl-header__title--disabled {
+      cursor: wait; }
+
+.kl-header {
+  color: #333; }
+  .kl-header--disabled {
+    line-height: 1px; }
+    .kl-header--disabled .kl-header__title {
+      cursor: wait; }
 
 /*# sourceMappingURL=output.css.map */

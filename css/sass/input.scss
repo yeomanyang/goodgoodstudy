@@ -133,6 +133,18 @@ p {
     }
 }
 
+/* Function */
+
+$grid-width: 40px;
+$gutter-width: 10px;
+@function grid-width($n) {
+    @return $n * $grid-width+($n - 1) * $gutter-width;
+}
+
+#sidebar {
+    width: grid-width(5);
+}
+
 /* mixins */
 
 @mixin silly-links($color) {
@@ -143,23 +155,12 @@ p {
 }
 
 @include silly-links(blue);
-
 @mixin box-shadow($shadows...) {
     box-shadow: $shadows;
 }
 
 .shadows {
     @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
-}
-
-@mixin b($block) {
-    .#{'kl-' + $block} {
-        @content;
-    }
-}
-
-@include b($block: header) {
-    color: #333;
 }
 
 $color: white;
@@ -174,3 +175,92 @@ $color: white;
         color: $color;
     }
 }
+
+$elementSeparator: "__";
+$modifierSeparator: "--";
+@function selectorToString($selector) {
+    $selector: inspect($selector); //cast to string
+    $selector: str-slice($selector, 2, -2); //remove bracket
+    @return $selector;
+}
+
+@function containsModifier($selector) {
+    $selector: selectorToString($selector);
+    @if str-index($selector, $modifierSeparator) {
+        @return true;
+    }
+    @else {
+        @return false;
+    }
+}
+
+// @function getBlock($selector) {
+//     $selector: selectorToString($selector);
+//     $modifierStart: str-index($selector, $modifierSeparator) — 1;
+//     @return str-slice($selector, 0, $modifierStart);
+// }
+@mixin b($block) {
+    $B: 'kl-'+$block !global;
+    .#{$B} {
+        @content;
+    }
+}
+
+// @mixin e($element) {
+//     @at-root {
+//         #{&}#{$elementSeparator+$element} {
+//             @content;
+//         }
+//     }
+// }
+
+@mixin e($element) {
+    $selector: &;
+    // $block: getBlock($selector);
+    @if containsModifier($selector) {
+        @at-root {
+            #{$selector} {
+                #{'.'+$B+$elementSeparator+$element} {
+                    @content;
+                }
+            }
+       }
+    }
+    @else {
+        @at-root {
+            #{$selector+$elementSeparator+$element} {
+                @content;
+            }
+        }
+    }
+}
+
+@mixin m($modifier) {
+    @at-root {
+        #{&}#{$modifierSeparator+$modifier} {
+            @content;
+        }
+    }
+}
+
+
+@include b($block: header) {
+    color: #333;
+    @include e($element: title) {
+        line-height: 1px;
+        @include m($modifier: disabled) {
+            cursor: wait;
+        }
+    }
+}
+
+@include b($block: header) {
+    color: #333;
+    @include m($modifier: disabled) {
+        line-height: 1px;
+        @include e($element: title) {
+            cursor: wait;
+        }
+    }
+}
+
