@@ -40,3 +40,23 @@ button {
     justify-content: space-around;
     margin-top: 20px;
 }
+
+input {
+    border-color: #eee;
+    border-radius: 2px;
+    color: #333;
+    height: 32px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 1;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+}

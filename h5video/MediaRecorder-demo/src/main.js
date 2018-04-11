@@ -4,6 +4,9 @@ let downloadButton = document.querySelector("button#download");
 let uploadButton = document.querySelector("button#upload");
 let recordVideo = document.querySelector("#recordvideo");
 let playVideo = document.querySelector("#playvideo");
+let audioRate = document.querySelector("#audioRate");
+let videoRate = document.querySelector("#videoRate");
+let uploadInput = document.querySelector("#uploadInput");
 
 startButton.onclick = toggleRecording;
 downloadButton.onclick = download;
@@ -52,8 +55,8 @@ function handleDataAvailable(e) {
 // 开始录制
 function startRecording() {
     let options = {
-        audioBitsPerSecond: 128000,
-        videoBitsPerSecond: 400000,
+        audioBitsPerSecond: Number(audioRate.value) * 1000 || 128000,
+        videoBitsPerSecond: Number(videoRate.value) * 1000 || 400000,
         mimeType: "video/webm"
     };
     try {
@@ -113,7 +116,7 @@ function upload() {
     formData.append('logisticBill', 'test');
     formData.append('createBy', 'yeoman');
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://10.240.252.32:8080/api/outbound/video/upload');
+    xhr.open('POST', uploadInput.value);
 
     xhr.send(formData);
 }
