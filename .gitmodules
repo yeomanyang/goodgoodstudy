@@ -1,0 +1,3 @@
+[submodule "git-workflow"]
+	path = git-workflow
+	url = git@git.coding.net:yeoman_yang/git-workflow.git
