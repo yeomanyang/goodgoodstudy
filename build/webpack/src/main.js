@@ -1,1 +1,2 @@
-import { sayHello } from './test';
+import { sayHello } from './javascript/test';
+import './css/index.css';

@@ -4,8 +4,10 @@ var path = require('path'),
     //简化生成适合webpack打包的html
     HtmlWebpackPlugin = require('html-webpack-plugin'),
 
+    MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
     //抽取css字符串并生成css文件
-    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    // ExtractTextPlugin = require("extract-text-webpack-plugin"),
 
     //这里引入webpack是为了使用webpack的热更新功能以及其他自带插件，见 module.exports.plugins
     webpack = require('webpack');
@@ -27,7 +29,7 @@ module.exports = {
     // 定义webpack打包时的输出文件名及路径
     output: {
         // 定义webpack打包之后的文件名
-        filename: 'webpack.bundle.js',
+        filename: '[name].[hash].js',
 
         // 定义打包文件的存储路径：当前目录的build文件夹
         path: path.resolve(__dirname, './dist'),
@@ -44,13 +46,21 @@ module.exports = {
 
     // 定义项目里各种类型模块的处理方式
     module: {
-        rules: [{
+        rules: [
+            // {
+            //     test: /\.css$/,
+            //     // 处理.css文件
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: "style-loader",
+            //         use: "css-loader"
+            //     })
+            // },
+            {
                 test: /\.css$/,
-                // 处理.css文件
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader"
+                ]
             },
             {
                 test: /\.(jpg|png)$/,
@@ -79,47 +89,52 @@ module.exports = {
     },
 
     // webpack插件
-    // plugins: process.env.NODE_ENV === 'production' ? [
-    //     // 生成html文件
-    //     new HtmlWebpackPlugin({
-    //         template: './src/index.html',
-    //         filename: 'index.html'
-    //     }),
-    //     // 压缩js文件
-    //     new webpack.optimize.UglifyJsPlugin({
-    //         compress: {
-    //             warnings: true
-    //         }
-    //     }),
-    //     // 生成css文件，一下括号中的'style.css' 是打包后的css文件名，可自定义
-    //     new ExtractTextPlugin("style.css"),
+    plugins: process.env.NODE_ENV !== 'production' ? [
+        // 生成html文件
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'index.html'
+        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'test',
+        //     minChunks: 2,
+        //     filename: 'test.[hash].js'
+        // }),
+        // 压缩js文件
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: true
+        //     }
+        // }),
+        // 生成css文件，一下括号中的'style.css' 是打包后的css文件名，可自定义
+        // new ExtractTextPlugin("[name].[contenthash].css"),
+        new MiniCssExtractPlugin({
+            filename: "[name].[contenthash].css",
+            chunkFilename: "[id].css"
+        }),
+        // 在webpack打包的时候会对这些变量做替换
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        }),
 
-    //     // 在webpack打包的时候会对这些变量做替换
-    //     new webpack.DefinePlugin({
-    //         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    //     }),
+        // // 给打包文件加上你的签名
+        // new webpack.BannerPlugin({
+        //     banner: 'This is created by nek-ui'
+        // })
+    ] : [
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'index.html'
+        }),
+        // 开启webpack全局热更新
+        new webpack.HotModuleReplacementPlugin(),
 
-    //     // 给打包文件加上你的签名
-    //     new webpack.BannerPlugin({
-    //         banner: 'This is created by nek-ui'
-    //     })
-    // ] : [
-    //     new HtmlWebpackPlugin({
-    //         template: './src/index.html',
-    //         filename: 'index.html'
-    //     }),
-    //     // 开启webpack全局热更新
-    //     new webpack.HotModuleReplacementPlugin(),
-
-    //     // 当接收到热更新信号时，在浏览器console控制台打印更多可读性高的模块名称等信息
-    //     new webpack.NamedModulesPlugin(),
-    //     new webpack.DefinePlugin({
-    //         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    //     }),
-    //     new OpenBrowserPlugin({
-    //         url: 'http://localhost:8080/'
-    //     }) // 自动在浏览器中打开 http://localhost:8080/
-    // ],
+        // 当接收到热更新信号时，在浏览器console控制台打印更多可读性高的模块名称等信息
+        new webpack.NamedModulesPlugin(),
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        })
+    ],
     // 定义webpack-dev-server
     devServer: {
         // 静态文件目录位置，只有当你需要在webpack-dev-server本地服务器查看或引用静态文件时用到。类型：boolean | string | array, 建议使用绝对路径
