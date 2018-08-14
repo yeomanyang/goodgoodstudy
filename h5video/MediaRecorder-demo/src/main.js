@@ -34,7 +34,8 @@ const getMedia = (async constraints => {
         };
     } catch (error) {
         console.error(error);
-        alert("你这操作，没法演示了(╯°Д°)╯︵ ┻━┻");
+        alert(error);
+        // alert("你这操作，没法演示了(╯°Д°)╯︵ ┻━┻");
     }
 })(constraints);
 
