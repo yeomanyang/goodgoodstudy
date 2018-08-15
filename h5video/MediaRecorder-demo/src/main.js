@@ -16,28 +16,31 @@ uploadButton.onclick = upload;
 let mediaRecorder;
 let stream;
 let chunks = [];
+if(window.printer) {
+    window.printer.getCamera();
+} else {
+    const constraints = {
+        audio: true,
+        video: true
+    };
 
-const constraints = {
-    audio: true,
-    video: true
-};
-
-// 获取提示用户允许使用一个视频/音频设备
-const getMedia = (async constraints => {
-    try {
-        const result = await navigator.mediaDevices.getUserMedia(constraints);
-        stream = result;
-        let video = recordVideo;
-        video.src = window.URL.createObjectURL(stream);
-        video.onloadedmetadata = function(e) {
-            video.play();
-        };
-    } catch (error) {
-        console.error(error);
-        alert(error);
-        // alert("你这操作，没法演示了(╯°Д°)╯︵ ┻━┻");
-    }
-})(constraints);
+    // 获取提示用户允许使用一个视频/音频设备
+    const getMedia = (async constraints => {
+        try {
+            const result = await navigator.mediaDevices.getUserMedia(constraints);
+            stream = result;
+            let video = recordVideo;
+            video.src = window.URL.createObjectURL(stream);
+            video.onloadedmetadata = function(e) {
+                video.play();
+            };
+        } catch (error) {
+            console.error(error);
+            alert(error);
+            // alert("你这操作，没法演示了(╯°Д°)╯︵ ┻━┻");
+        }
+    })(constraints);
+}
 
 // 开始录制和结束录制
 function toggleRecording() {
