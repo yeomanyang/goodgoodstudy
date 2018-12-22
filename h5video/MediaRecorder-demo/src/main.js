@@ -30,7 +30,7 @@ if(window.printer) {
             const result = await navigator.mediaDevices.getUserMedia(constraints);
             stream = result;
             let video = recordVideo;
-            video.src = window.URL.createObjectURL(stream);
+            video.srcObject = stream
             video.onloadedmetadata = function(e) {
                 video.play();
             };
