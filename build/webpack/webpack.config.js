@@ -114,7 +114,8 @@ module.exports = {
         }),
         // 在webpack打包的时候会对这些变量做替换
         new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            'LODOP.PRINT': 'LODOP.PREVIEW()'
         }),
 
         // // 给打包文件加上你的签名
@@ -132,7 +133,8 @@ module.exports = {
         // 当接收到热更新信号时，在浏览器console控制台打印更多可读性高的模块名称等信息
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            cleverdog: '"LODOP.PREVIEW()"'
         })
     ],
     // 定义webpack-dev-server
