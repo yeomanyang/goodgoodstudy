@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>debounce&throttle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div>
+        <label>正常input</label>
+        <input id="input" type="text" />
+        <span id="inputRes"></span>
+    </div>
+
+    <div>
+        <label>debounce input</label>
+        <input id="debounceInput" type="text" />
+    </div>
+
+    <div>
+        <label>throttle input</label>
+        <input id="throttleInput" type="text" />
+    </div>
+
+    <script>
+        function debounce(func, delay) {
+            let timer;
+            return () => {
+                const context = this;
+                const args = arguments;
+                clearTimeout(timer);
+
+                timer = setTimeout(() => {
+                    func.apply(context, args);
+                }, delay);
+            }
+        }
+
+        function throttle(func, delay) {
+            let lastTime = null;
+            return () => {
+                const context = this;
+                const args = arguments;
+                const now = new Date();
+                if (now - lastTime > delay || !lastTime) {
+                    func.apply(context, args);
+                    lastTime = now;
+                }
+            }
+        }
+
+        document
+            .getElementById('input')
+            .addEventListener('input', () => {
+                console.log('输出一次');
+            });
+
+        document
+            .getElementById('debounceInput')
+            .addEventListener('input', debounce(() => {
+                console.log('合并输出一次');
+            }, 500));
+
+        document
+            .getElementById('throttleInput')
+            .addEventListener('input', throttle(() => {
+                console.log('均匀输出一次');
+            }, 500));
+    </script>
+</body>
+</html>
